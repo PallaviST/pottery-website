@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Potter Shopping Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            background-color: #b8f3c2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            text-transform: capitalize;
+        }
+
+        html {
+            font-size: 62.5%;
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem;
+            overflow-x: hidden;
+        }
+
+        /* header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            padding: 2rem 9%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 3rem;
+            color: #333;
+            font-weight: 900;
+        }
+
+        header .navbar a {
+            font-size: 2rem;
+            padding: 0 1.5rem;
+            color: #666;
+            transition: 0.3s;
+        }
+
+        header .navbar a:hover {
+            color: #fdc5f5;
+            font-weight: 500;
+        }
+
+        header .icons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 1.5rem;
+        }
+
+        header .icons a {
+            font-size: 3rem;
+            color: #333;
+            margin: 0.5rem;
+            transition: 0.3s;
+        }
+
+        header .icons a:hover {
+            color: #fb6f92;
+            font-weight: 600;
+        }
+
+        header .icons span {
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        header #toggler {
+            display: none;
+        }
+
+        header .fa-bars {
+            font-size: 3rem;
+            color: #333;
+            border: 0.1rem solid rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            header .fa-bars {
+                display: block;
+            }
+
+            header .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #eee;
+                border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.5s ease-in-out;
+            }
+
+            header #toggler:checked~.navbar {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            header .navbar a {
+                margin: 1.5rem;
+                padding: 1.5rem;
+                background-color: #fff;
+                border: 0.1rem solid rgba(0, 0, 0, 0.1);
+                display: block;
+            }
+        }
+
+        /* section default */
+        section {
+            padding: 6rem 9% 3rem;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 4rem;
+            padding: 1rem;
+            color: #333;
+            margin: 2rem 0;
+            background-color: rgba(255, 51, 184, 0.1);
+        }
+
+        .heading span {
+            color: #fb6f92;
+        }
+
+        /* login section */
+        .login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6),
+                    rgba(0, 0, 0, 0.6)), url("login-bg.jpg") center/cover no-repeat;
+        }
+
+        .login .form-box {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 40rem;
+            text-align: center;
+        }
+
+        .login .tab-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+        }
+
+        .login .tab-buttons button {
+            flex: 1;
+            padding: 1rem;
+            background: #eee;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.6rem;
+            margin: 0 0.5rem;
+        }
+
+        .login .tab-buttons button.active {
+            background: #db3760;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .login form {
+            display: none;
+        }
+
+        .login form.active {
+            display: block;
+        }
+
+        .login form input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 0.1rem solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 1.6rem;
+        }
+
+        .login .forgot {
+            display: block;
+            margin-top: 1rem;
+            font-size: 1.4rem;
+            color: #0077cc;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background-color: #333;
+            border-radius: 3rem;
+            color: #fff;
+            padding: 0.9rem 3.5rem;
+            font-size: 1.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #db3760;
+        }
+
+        /* home section */
+        .home {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6),
+                    rgba(0, 0, 0, 0.6)), url("potter pic.webp");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .home .content {
+            max-width: 50rem;
+        }
+
+        .home .content h3 {
+            font-size: 6rem;
+            color: #ffe5ec;
+        }
+
+        .home .content span {
+            font-size: 3.5rem;
+            color: #ff8fab;
+            padding: 1rem 0;
+            line-height: 1.5;
+            display: block;
+        }
+
+        .home .content p {
+            font-size: 1.5rem;
+            color: #ccc;
+            padding: 1rem 0;
+            line-height: 1.5;
+        }
+
+        /* about section */
+        .about .row {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 2rem 0 3rem;
+        }
+
+        .about .row .video-container {
+            flex: 1 1 40rem;
+            position: relative;
+        }
+
+        .about .row .video-container video {
+            width: 100%;
+            border: 1.5rem solid #fff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .about .row .video-container h3 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            background-color: #fff;
+            width: 100%;
+            padding: 1rem 2rem;
+            text-align: center;
+            mix-blend-mode: screen;
+        }
+
+        .about .row .content {
+            flex: 1 1 40rem;
+        }
+
+        /* product section */
+        .products .box-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+            gap: 2rem;
+        }
+
+        .products .box {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .products .box img {
+            width: 100%;
+            height: 20rem;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .products .box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* review section */
+        .review .box-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+            gap: 2rem;
+        }
+
+        .review .box {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .review .box img {
+            height: 8rem;
+            width: 8rem;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .review .box h3 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .review .box p {
+            font-size: 1.5rem;
+            color: #666;
+            margin: 1rem 0;
+        }
+
+        /* contact section */
+    .contact-box {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('contact-bg.jpg') center/cover no-repeat;
+}
+.contact .form-box{
+    background: #fff;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 40rem;
+    text-align: center;
+}
+
+
+.contact-form,
+.contact-info {
+  flex: 1 1 35rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.8rem 1.5rem rgba(0,0,0,0.1);
+}
+
+.contact-form h2,
+.contact-info h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #fb6f92;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.contact-form button {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.contact-info p {
+  font-size: 1.6rem;
+  margin: 0.8rem 0;
+}
+
+.contact-info .social-icons {
+  margin-top: 1rem;
+}
+
+.contact-info .social-icons a {
+  font-size: 2.5rem;
+  margin-right: 1rem;
+  color: #fb6f92;
+  transition: 0.3s;
+}
+
+.contact-info .social-icons a:hover {
+  color: #333;
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <input type="checkbox" id="toggler">
+        <label for="toggler" class="fa-solid fa-bars"></label>
+        <a href="#" class="logo">POT
+            <span><img src="C:\Users\dell\Downloads\HTML-Index-0.14\HTML-Index-0.14\pot.image.jpg" width="25"
+                    height="25"></span>
+        </a>
+        <nav class="navbar">
+            <a href="#login">Login</a>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#products">Products</a>
+            <a href="#review">Review</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="icons">
+            <a href="#" class="fa-solid fa-heart"></a>
+            <span>Like</span>
+        </div>
+        <div class="icons">
+            <a href="#" class="fa-solid fa-cart-shopping"></a>
+            <span>Cart</span>
+        </div>
+        <div class="icons">
+            <a href="#" class="fa-solid fa-user"></a>
+            <span>Account</span>
+        </div>
+    </header>
+
+    <!-- login -->
+    <section class="login" id="login">
+        <div class="form-box">
+            <div class="tab-buttons">
+                <button id="loginBtn" class="active">Login</button>
+                <button id="signupBtn">Signup</button>
+            </div>
+
+            <!-- Login form -->
+            <form id="loginForm" class="active">
+                <input type="text" placeholder="Username or Email" required>
+                <input type="password" placeholder="Enter Password" required>
+                <button type="submit" class="btn">Login</button>
+                <a class="forgot" href="#">Forgot Password?</a>
+            </form>
+
+            <!-- Signup form -->
+            <form id="signupForm">
+                <input type="text" placeholder="Phone Number" required>
+                <input type="email" placeholder="Enter Email" required>
+                <input type="text" placeholder="Enter Username" required>
+                <input type="password" placeholder="Enter Password" required>
+                <button type="submit" class="btn">Signup</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- home -->
+    <section class="home" id="home">
+        <div class="content">
+            <h3>Indian Traditional Pottery</h3>
+            <span>Beautiful & Handmade Pot</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit aspernatur omnis amet hic. Laboriosam ad
+                dicta eius consectetur expedita non assumenda dolores deleniti fugit tempore! Eius consectetur minima
+                placeat iste!</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- about -->
+    <section class="about" id="about">
+        <h1 class="heading">About <span>Us</span></h1>
+        <div class="row">
+            <div class="video-container">
+                <video src="C:\Users\dell\Downloads\HTML-Index-0.14\HTML-Index-0.14\seve . video.mp4" loop autoplay
+                    muted></video>
+                <h3>Best Pottery Sellers</h3>
+            </div>
+            <div class="content">
+                <h3>Why Choose Us?</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque fuga quidem minima, quam ipsum ab
+                    quibusdam
+                    eaque voluptatum consectetur similique.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum nobis ea repellat! Ducimus, expedita
+                    repudiandae?</p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <!-- products -->
+    <section class="products" id="products">
+        <h1 class="heading">Our <span>Products</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\pot.jpg" alt="Clay Pot">
+                <h3>Clay Pot</h3>
+                <p>₹250</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\360_F_566341036_f2mCzWyHi9I4aMOSSiy1XUUhvEqdUKJ1.jpg" alt="Decor Pot">
+                <h3>Decor Pot</h3>
+                <p>₹300</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\a45282501783671f28488447497dc294.webp" alt="Matka">
+                <h3>Matka</h3>
+                <p>₹200</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\images.jfif" alt="Painted Pot">
+                <h3>Painted Pot</h3>
+                <p>₹350</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\images (1).jfif" alt="Handmade Jar">
+                <h3>Handmade Jar</h3>
+                <p>₹400</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="https://www.shutterstock.com/image-photo/thaiearthenware-ban-chiang-pottery-unique-260nw-2452882803.jpg"
+                    alt="Flower Vase">
+                <h3>Flower Vase</h3>
+                <p>₹500</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="https://i.ytimg.com/vi/CIr0zZaCKOs/sddefault.jpg" alt="Clay Pot">
+                <h3>Clay Pot</h3>
+                <p>₹250</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/038/281/396/small/ai-generated-terracotta-dinner-set-pottery-dinner-set-brown-clay-dinner-set-scorched-soil-dinner-set-clay-plates-ceramics-dinner-set-dinner-set-transparent-background-png.png"
+                    alt="Decor Pot">
+                <h3>Decor Pot</h3>
+                <p>₹300</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\360_F_1387010783_ycP5eZBthqDK8wMwpwbAV0tMf4db0MVk.jpg" alt="Matka">
+                <h3>Matka</h3>
+                <p>₹200</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\61zsXZIEc-L._UF894,1000_QL80_.jpg" alt="Painted Pot">
+                <h3>Painted Pot</h3>
+                <p>₹350</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\blue-pottery-1.png" alt="Handmade Jar">
+                <h3>Handmade Jar</h3>
+                <p>₹400</p>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="box">
+                <img src="C:\Users\dell\Downloads\wedding-design_orig.jpg" alt="Flower Vase">
+                <h3>Flower Vase</h3>
+                <p>₹500</p>
+                <button class="btn">Add to Cart</button>
+                <!-- Add remaining products in same structure -->
+            </div>
+    </section>
+
+
+    <!-- review -->
+    <section class="review" id="review">
+        <h1 class="heading">Customer <span>Reviews</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <img src="user1.jpg" alt="">
+                <h3>Aditi</h3>
+                <p>Beautiful pots! Very authentic and high quality.</p>
+            </div>
+            <div class="box">
+                <img src="user2.jpg" alt="">
+                <h3>Rahul</h3>
+                <p>Delivery was fast. Handmade designs are amazing.</p>
+            </div>
+            <div class="box">
+                <img src="user3.jpg" alt="">
+                <h3>Meera</h3>
+                <p>Best pottery site! Value for money.</p>
+            </div>
+        </div>
+    </section>
+
+     <!-- contact -->
+<section class="contact" id="contact">
+  <h1 class="heading"><span>Contact</span> Us</h1>
+  <div class="row">
+
+    <!-- Contact Form -->
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <input type="text" placeholder="Subject" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button class="btn" type="submit">Send Message</button>
+    </form>
+
+   
+   
+
